@@ -10,4 +10,4 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     stack: process.env.NODE_ENV === 'production' ? null : err.stack
   })
 };
-export = errorHandler
+export default errorHandler

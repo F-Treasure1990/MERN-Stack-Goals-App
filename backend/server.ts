@@ -1,9 +1,9 @@
-
-import express, { Response, Request } from "express"
+import express from "express"
 import * as dotenv from 'dotenv'
 dotenv.config()
 import connectDB from "./config/db"
-import goalRoute from './routes/goal.route'
+import goalRouter from './routes/goal.router'
+import userRouter from './routes/user.router'
 import errorHandler from "./middleware/error.middleware"
 
 //Connect to mongoDB via Mongoose
@@ -16,7 +16,8 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
-app.use("/api/goals", goalRoute)
+app.use("/api/goals", goalRouter)
+app.use("/api/users", userRouter)
 
 app.use(errorHandler)
 

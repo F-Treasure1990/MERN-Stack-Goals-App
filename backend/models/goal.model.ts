@@ -1,10 +1,11 @@
 import { model, Schema } from "mongoose"
 
-interface iSchema {
-  text: string,
-}
-
-const goalSchema = new Schema<iSchema>({
+const goalSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
   text: {
     type: String,
     required: [true, "Please add a text Value"]
@@ -15,4 +16,4 @@ const goalSchema = new Schema<iSchema>({
     timestamps: true
   })
 
-export = model<iSchema>('Goal', goalSchema)
+export default model('Goal', goalSchema)

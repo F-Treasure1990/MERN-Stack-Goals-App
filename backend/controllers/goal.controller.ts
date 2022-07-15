@@ -43,15 +43,13 @@ export const updateGoal = asyncHander(async (req: RequestExtended, res: Response
     res.status(400)
     throw new Error('Goal not found')
   }
-  //find user attached to these goals
-  const user = await User.findById(req.user.id)
   // check for user 
-  if (!user) {
+  if (!req.user) {
     res.status(400)
     throw new Error('User not found')
   }
   // checking loged in user matches the goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not Authorised')
   }
@@ -72,14 +70,13 @@ export const deleteGoal = asyncHander(async (req: RequestExtended, res: Response
     res.status(400)
     throw new Error('Goal not found')
   }
-  const user = await User.findById(req.user.id)
   // check for user 
-  if (!user) {
+  if (!req.user) {
     res.status(400)
     throw new Error('User not found')
   }
   // checking loged in user matches the goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not Authorised')
   }

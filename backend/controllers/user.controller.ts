@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import asyncHander from 'express-async-handler'
 import User from '../models/user.model'
 import generateToken from '../utils/genterateToken'
-import {RequestExtended} from '../middleware/auth.middleware'
+import { RequestExtended } from '../middleware/auth.middleware'
 
 // @desc  Register a User
 // @route GET /api/users
@@ -41,7 +41,7 @@ export const registerUser = asyncHander(async (req: Request, res: Response) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      token : generateToken(user._id)
+      token: generateToken(user._id)
     })
   } else {
     res.status(400)
@@ -63,7 +63,7 @@ export const loginUser = asyncHander(async (req: Request, res: Response) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      token : generateToken(user._id)
+      token: generateToken(user._id)
     })
   } else {
     res.status(400)
@@ -75,14 +75,7 @@ export const loginUser = asyncHander(async (req: Request, res: Response) => {
 // @route GET /api/users/me
 // @access Public 
 export const getMe = asyncHander(async (req: RequestExtended, res: Response) => {
-  const {_id, email, name,} = await User.findById(req.user.id)
-
-  res.status(200).json({
-    id: _id,
-    name, 
-    email
-  })
-
+  res.status(200).json(req.user)
 })
 
 
